@@ -2,10 +2,10 @@
 AS3 components inspired by Google's material design.
 
 libraries used:
-* [starlib](https://github.com/blaxstar/starlib)
-* [as3 signals](https://github.com/robertpenner/as3-signals)
-* [Tweenlite + Filter plugin](https://github.com/greensock/GreenSock-AS3)
-* [AS3SVGRenderer](https://github.com/lucaslorentz/AS3SVGRenderer)
+* [starlib](https://github.com/blaxstar/starlib) (utility classes/functions)
+* [as3 signals](https://github.com/robertpenner/as3-signals) (faster alternative to events)
+* [Tweenlite](https://github.com/greensock/GreenSock-AS3) (most animations)
+* [AS3SVGRenderer](https://github.com/lucaslorentz/AS3SVGRenderer) (for Icon component)
 
 PREVIEW
 ========
