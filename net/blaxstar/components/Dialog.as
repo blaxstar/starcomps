@@ -13,12 +13,7 @@ package net.blaxstar.components {
   public class Dialog extends Component {
     static public const OPTION_EMPHASIS_LOW:uint = 0;
     static public const OPTION_EMPHASIS_HIGH:uint = 1;
-    // TODO: create a vector of dialogs that are inactive, and a variable for the current active dialog.
-    // keep track of the currently active one via a `currentlyActive` property.
-    // when a dialog is clicked (mousedown), move `currentlyActive` to the inactive vector, then set the clicked dialog to `currentlyActive`.
-    // also bring the currently active to the front.
-    // make it so that dialogs whose `draggable` property is set to false cannot participate in this behavior (just in case it is positioned above another displayobject).
-    // also make a `pin()` method, which will always ensure the dialog is on top. only one dialog should be pinned at a time, since multiple cannot possibly be placed at the same index.
+    
     protected var _titlePT:PlainText;
     protected var _messagePT:PlainText;
     private var _titleString:String;
