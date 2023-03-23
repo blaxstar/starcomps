@@ -16,6 +16,9 @@ import thirdparty.org.osflash.signals.natives.NativeSignal;
 	 * @author ...
 	 */
 	public class ListItem extends Component {
+    private const MIN_HEIGHT:uint = 50;
+    private const MIN_WIDTH:uint = 100;
+    
 		private const PADDING:uint = 7;
 		static private var _procid:uint = 0;
 		
@@ -48,9 +51,11 @@ import thirdparty.org.osflash.signals.natives.NativeSignal;
 		 * created to be overridden.
 		 */
 		override public function init():void {
-			_width_ = 100;
-			_height_ = 50;
+			_width_ = MIN_WIDTH;
+			_height_ = MIN_HEIGHT;
 			_textFormat = Font.H6;
+      mouseChildren = false;
+      buttonMode = useHandCursor = true;
 			super.init();
 		}
 		/**
@@ -68,17 +73,13 @@ import thirdparty.org.osflash.signals.natives.NativeSignal;
 			
 			super.addChildren();
 		}
+
 		/**
 		 * (re)draws the component and applies any pending visual changes.
 		 */
 		override public function draw(e:Event=null):void {
 			_label.text = _labelString;
 			_label.move((_width_ / 2) - (_label.width / 2), (_height_ / 2) - (_label.height / 2));
-			_background.graphics.beginFill(((_alternateColor) ? Style.PRIMARY_DARK.value : Style.PRIMARY_LIGHT.value));
-			_background.graphics.drawRect(0, 0, Math.max(_width_, _label.width) + (PADDING * 2), _height_);
-			_background.graphics.endFill();
-			_background.alpha = (_alternateColor) ? 0.2 : 0;
-			
 		}
 		/** END INTERFACE ===================== */
 		

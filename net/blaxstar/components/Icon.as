@@ -1,22 +1,22 @@
 package net.blaxstar.components {
-import flash.display.DisplayObjectContainer;
-import flash.events.Event;
+  import flash.display.DisplayObjectContainer;
+  import flash.events.Event;
 
-import net.blaxstar.utils.StringUtil;
+  import net.blaxstar.utils.StringUtil;
 
-import thirdparty.com.lorentz.SVG.data.style.StyleDeclaration;
-import thirdparty.com.lorentz.SVG.display.SVGDocument;
-import thirdparty.com.lorentz.SVG.display.base.SVGElement;
-import thirdparty.com.lorentz.SVG.events.SVGEvent;
-import thirdparty.com.lorentz.SVG.utils.DisplayUtils;
-import thirdparty.org.osflash.signals.Signal;
-import thirdparty.org.osflash.signals.natives.NativeSignal;
+  import thirdparty.com.lorentz.SVG.data.style.StyleDeclaration;
+  import thirdparty.com.lorentz.SVG.display.SVGDocument;
+  import thirdparty.com.lorentz.SVG.display.base.SVGElement;
+  import thirdparty.com.lorentz.SVG.events.SVGEvent;
+  import thirdparty.com.lorentz.SVG.utils.DisplayUtils;
+  import thirdparty.org.osflash.signals.Signal;
+  import thirdparty.org.osflash.signals.natives.NativeSignal;
 
-/**
- * ...
- * @author Deron Decamp
- */
-public class Icon extends Component {
+  /**
+   * ...
+   * @author Deron Decamp
+   */
+  public class Icon extends Component {
 
     static public const X3_DOT_MENU:String = '<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="M10 16q-.625 0-1.062-.438Q8.5 15.125 8.5 14.5t.438-1.062Q9.375 13 10 13t1.062.438q.438.437.438 1.062t-.438 1.062Q10.625 16 10 16Zm0-4.5q-.625 0-1.062-.438Q8.5 10.625 8.5 10t.438-1.062Q9.375 8.5 10 8.5t1.062.438q.438.437.438 1.062t-.438 1.062q-.437.438-1.062.438ZM10 7q-.625 0-1.062-.438Q8.5 6.125 8.5 5.5t.438-1.062Q9.375 4 10 4t1.062.438q.438.437.438 1.062t-.438 1.062Q10.625 7 10 7Z"/></svg>';
     static public const ACCESSIBILITY:String = '<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="M10 5.5q-.729 0-1.24-.51-.51-.511-.51-1.24t.51-1.24Q9.271 2 10 2t1.24.51q.51.511.51 1.24t-.51 1.24q-.511.51-1.24.51ZM7.5 17.75V8.104q-1.146-.083-2.26-.333-1.115-.25-2.24-.542l.375-1.396Q5 6.271 6.656 6.51q1.656.24 3.344.24t3.344-.24q1.656-.239 3.281-.677L17 7.229q-1.125.292-2.24.542-1.114.25-2.26.333v9.646H11l-.188-4.625H9.208L9 17.75Z"/></svg>';
@@ -72,8 +72,9 @@ public class Icon extends Component {
     private var _whRatio:Number;
 
     public function Icon(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0, url:String = '') {
-        if (!StringUtil.stringIsEmpty(url)) _src = url;
-        super(parent, xpos, ypos);
+      if (!StringUtil.stringIsEmpty(url))
+        _src = url;
+      super(parent, xpos, ypos);
     }
 
     /** INTERFACE net.blaxstar.components.IComponent ===================== */
@@ -83,36 +84,37 @@ public class Icon extends Component {
      * frame. created to be overridden.
      */
     override public function init():void {
-        onEnterFrame = new NativeSignal(this, Event.ENTER_FRAME, Event);
-        onAdded = new NativeSignal(this, Event.ADDED_TO_STAGE, Event);
-        _resizeEvent_ = new Event(Event.RESIZE);
-        onResize = new NativeSignal(this, Event.RESIZE, Event);
-        onDraw = new Signal();
-        _width_ = _height_ = 16;
+      onEnterFrame = new NativeSignal(this, Event.ENTER_FRAME, Event);
+      onAdded = new NativeSignal(this, Event.ADDED_TO_STAGE, Event);
+      _resizeEvent_ = new Event(Event.RESIZE);
+      onResize = new NativeSignal(this, Event.RESIZE, Event);
+      onDraw = new Signal();
+      _width_ = _height_ = 16;
 
-        _doc = new SVGDocument();
-        _doc.addEventListener(SVGEvent.RENDERED, init2);
-        if (_src) _doc.load(_src);
+      _doc = new SVGDocument();
+      _doc.addEventListener(SVGEvent.RENDERED, init2);
+      if (_src)
+        _doc.load(_src);
 
     }
 
     private function init2(e:SVGEvent):void {
-        _doc.removeEventListener(SVGEvent.RENDERED, init2);
-        dispatchEvent(new Event('iconLoaded'));
-        _isRendered = true;
-        addChildren();
-        onAdded.addOnce(draw);
-        _width_ = _doc.width;
-        _height_ = _doc.height;
-        _whRatio = _height_ / _width_;
+      _doc.removeEventListener(SVGEvent.RENDERED, init2);
+      dispatchEvent(new Event('iconLoaded'));
+      _isRendered = true;
+      addChildren();
+      onAdded.addOnce(draw);
+      _width_ = _doc.width;
+      _height_ = _doc.height;
+      _whRatio = _height_ / _width_;
     }
 
     /**
      * initializes and adds all required children of the component.
      */
     override public function addChildren():void {
-        addChild(_doc);
-        super.addChildren();
+      addChild(_doc);
+      super.addChildren();
     }
 
     /**
@@ -120,48 +122,52 @@ public class Icon extends Component {
      */
     override public function draw(e:Event = null):void {
 
-        _doc.width = _width_;
-        _doc.height = _height_;
-        super.draw(e);
+      _doc.width = _width_;
+      _doc.height = _height_;
+      super.draw(e);
     }
 
     /** END INTERFACE ===================== */
-    public function setColor(colorCode:String = '#FFFFFF'):void {
-        var e:SVGElement = DisplayUtils.getSVGElement(_doc);
-        e.style.setProperty('fill', colorCode);
+    public function setColor(colorCode:String = 'FFFFFF'):void {
+      if (colorCode.indexOf('#') < 0) {
+        colorCode = '#' + colorCode;
+      }
+      var e:SVGElement = DisplayUtils.getSVGElement(_doc);
+      e.style.setProperty('fill', colorCode);
     }
 
     public function setSVGXML(svgString:String):void {
-        var s:StyleDeclaration = new StyleDeclaration();
-        _src = '';
-        _doc.clear();
-        _isRendered = false;
-        _doc.autoAlign = true;
-        _doc.parse(svgString);
+      var s:StyleDeclaration = new StyleDeclaration();
+      _src = '';
+      _doc.clear();
+      _isRendered = false;
+      _doc.autoAlign = true;
+      _doc.parse(svgString);
     }
 
     override public function setSize(w:Number, h:Number):void {
-        if (!_isRendered) {
-            queueFunction(arguments.callee, w, h);
-        }
-        super.setSize(w, h);
+      if (!_isRendered) {
+        queueFunction(arguments.callee, w, h);
+      }
+      super.setSize(w, h);
     }
 
     public function get document():SVGDocument {
-        return _doc;
+      return _doc;
     }
 
     public function get src():String {
-        return _src;
+      return _src;
     }
 
     public function set src(val:String):void {
-        if (StringUtil.stringIsEmpty(val)) return;
-        _src = val;
-        _doc.clear();
-        _isRendered = false;
-        _doc.load(_src);
+      if (StringUtil.stringIsEmpty(val))
+        return;
+      _src = val;
+      _doc.clear();
+      _isRendered = false;
+      _doc.load(_src);
     }
-}
+  }
 
 }

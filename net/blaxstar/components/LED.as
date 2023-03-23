@@ -1,5 +1,4 @@
-package net.blaxstar.components
-{
+package net.blaxstar.components {
   import flash.display.DisplayObjectContainer;
   import net.blaxstar.style.Color;
   import flash.display.Graphics;
@@ -15,19 +14,21 @@ package net.blaxstar.components
     private var _isOn:Boolean;
 
     /**
-     * @param parent 
+     * @param parent
      * @param xpos
      * @param ypos
-     * @param onColor 
+     * @param onColor
      */
-    public function LED(parent:DisplayObjectContainer, xpos:Number=0, ypos:Number=0, onColor:uint=0) {
-      
-      if (onColor > 0) _onColor = onColor;
-      else _onColor = Color.PRODUCT_BLUE.value;
-      
+    public function LED(parent:DisplayObjectContainer, xpos:Number = 0, ypos:Number = 0, onColor:uint = 0) {
+
+      if (onColor > 0)
+        _onColor = onColor;
+      else
+        _onColor = Color.PRODUCT_BLUE.value;
+
       _offColor = 0x1a1a1a;
       _isFlashing = false;
-      
+
       super(parent, xpos, ypos);
     }
 
@@ -49,13 +50,16 @@ package net.blaxstar.components
       if (_isFlashing) {
         if (_isOn) {
           currColor = _onColor;
-        } else {
+        }
+        else {
           currColor = _offColor;
         }
-      } else {
+      }
+      else {
         if (_isOn) {
-          currColor = _onColor
-        } else {
+          currColor = _onColor;
+        }
+        else {
           currColor = _offColor;
         }
       }
@@ -65,9 +69,11 @@ package net.blaxstar.components
       g.endFill();
     }
 
-    public function flash() :void {
-      if (_isOn) turnOff();
-      else turnOn();
+    public function flash():void {
+      if (_isOn)
+        turnOff();
+      else
+        turnOn();
 
       draw();
     }
@@ -93,7 +99,8 @@ package net.blaxstar.components
     public function set isFlashing(val:Boolean):void {
       if (!val) {
         clearInterval(_flashInterval);
-      } else {
+      }
+      else {
         _flashInterval = setInterval(flash, 1000);
       }
       _isFlashing = val;
