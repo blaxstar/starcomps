@@ -96,7 +96,7 @@ package net.blaxstar.components {
       _dialogCard.maskThreshold = val;
     }
 
-    public function SaddOption(name:String, action:Function = null, emphasis:uint = OPTION_EMPHASIS_LOW):Button {
+    public function addOption(name:String, action:Function = null, emphasis:uint = OPTION_EMPHASIS_LOW):Button {
       var b:Button = new Button(_dialogCard.optionContainer, 0, 0, name);
       if (action != null)
         b.addClickListener(action);
